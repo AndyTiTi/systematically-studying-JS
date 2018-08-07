@@ -1,0 +1,26 @@
+[
+	{
+		"id":1,
+		"name":"《JS 面试》",
+		"price":189,
+		"discount":1
+	},
+	{
+		"id":2,
+		"name":"《JS 高级编程》",
+		"price":108,
+		"discount":0
+	},
+	{
+		"id":3,
+		"name":"《JS 面试技巧》",
+		"price":119,
+		"discount":1
+	},
+	{
+		"id":4,
+		"name":"《JS 高级DOM编程艺术》",
+		"price":98,
+		"discount":0
+	}
+]

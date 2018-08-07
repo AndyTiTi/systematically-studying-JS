@@ -1,3 +1,7 @@
+import App from './demo/App'
+let app = new App('app');
+app.init();
+
 /*class Car{
   constructor(number,name){
     this.number = number;
@@ -36,8 +40,10 @@ let b = new Kuaiche(200,'捷达');
 let trip = new Trip(b);
 trip.start();
 trip.end();*/
+
+
 // 摄像头
-class Camera{
+/*class Camera{
   shot(car){
     return {
       num:car.num,
@@ -154,4 +160,4 @@ console.log('第三辆车离开')
 setTimeout(()=>{
   park.out(car3)
 })
-
+*/
