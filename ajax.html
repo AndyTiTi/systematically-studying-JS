@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script>
+        
+        var $ = {
+            //传递参数对象，返回拼接之后的字符串
+            //{‘name’:’jack,’age’:20}=>  name=jack&age=20&
+            getParmeter: function (data) {
+                var arr = [];
+                for (var name in data) {
+                    arr.push(encodeURIComponent(name) + "=" + encodeURIComponent(data[name]));
+                }
+                arr.push(("v=" + Math.random()).replace(".", ""));
+                return arr.join("&");
+            },
+
+            ajax: function (obj) {
+                if (obj == null || typeof obj != "object") {
+                    return false;
+                }
+                var type = (obj.type || 'GET').toLowerCase();
+                var url = obj.url || location.pathname;
+                var data = obj.data || {};
+                data = this.getParmeter(data);
+
+                var success = obj.success || function () {
+                        };
+
+                var xhr;
+                //第一步 创建传输对象
+                if (window.ActiveXObject) {
+                    xhr = new window.ActiveXObject("Microsoft.XMLHTTP");
+                } else {
+                    xhr = new XMLHttpRequest();
+                }
+                //第二步 连接和发送
+                if (type == 'get') {
+                    xhr.open('GET', url + '?' + data, true);
+                    xhr.send(null);
+                } else if (type == "post") {
+                    xhr.open('POST', url, true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.send(data);
+                }
+
+
+                //第三步 接受数据并执行回调方法
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+                        var status = xhr.status;
+                        if (status >= 200 && status < 300) {
+                            obj.success && obj.success(xhr.responseText, xhr.responseXML);
+                        } else {
+                            obj.error && obj.error(status);
+                        }
+                    }
+                }
+
+            }
+        };
+        function loadXMLDoc() {
+            $.ajax({
+                url: "/try/ajax/ajax_info.txt",
+                type: 'GET',
+                success: function (result) {
+                    console.log(result)
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+<div id="myDiv"><h2>使用 AJAX 修改该文本内容</h2></div>
+<button type="button" onclick="loadXMLDoc()">修改内容</button>
+
+</body>
+</html>

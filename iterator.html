@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // let iterator = [1,2,3][Symbol.iterator]();
+    // console.log(iterator.next());
+    // console.log(iterator.next());
+    // console.log(iterator.next());
+    // console.log(iterator.next());
+
+    let res = null;
+    let iterator = myIterator([3, 7]);
+    console.log( iterator.next() ); // {value: 3, done: false}
+    console.log( iterator.next() ); // {value: 7, done: false}
+    console.log( iterator.next() ); // {value: undefined, done: true}
+    function myIterator(array = []) {
+      let index = 0;
+      return {
+        next() {
+          return index < array.length 
+            ? { value: array[index++], done: false }
+            : { value: undefined, done: true };
+        }
+      };
+    }
+  </script>
+</body>
+</html>
